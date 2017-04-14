@@ -1,0 +1,42 @@
+@* addProductForm defined above is the parameter passed to this view by the controller *@
+
+@import helper._
+
+@(addFoodForm: play.data.Form[models.Food], user: models.users.User)
+
+@* helpers will be used to create the form dynamically, though static HTML form element also work. *@
+
+@main("Add Food", user) {
+	<div class="well">
+		<h3>Add new food</h3>
+
+		<!-- Use the views.html.helpers package to create the form -->
+		@form(action = routes.HomeController.addFoodSubmit(), 'class -> "form-horizontal", 'role->"form") {
+
+			<!-- Build the form, adding an input for each field -->
+
+
+
+			<!-- Note the label parameter -->
+
+			@inputText(addFoodForm("foodName"), '_label -> "Name",'class -> "form-control")
+			@inputText(addFoodForm("kcal"), '_label -> "Kcal",'class -> "form-control")
+			@inputText(addFoodForm("protein"), '_label -> "Protein",'class -> "form-control")
+			@inputText(addFoodForm("carbs"), '_label -> "Carbs",'class -> "form-control")
+			@inputText(addFoodForm("fat"), '_label -> "Fats",'class -> "form-control")
+			@inputText(addFoodForm("suitable"), '_label -> "Suitable",'class -> "form-control")
+
+			<!-- Hidden ID field - required for product updates -->
+			@inputText(addFoodForm("foodId"), '_label -> "", 'hidden -> "hidden")
+
+		<!-- Add a submit button -->
+	  <div class="actions">
+		  <input type="submit" value="Save" class="btn btn-primary">
+				<a href="@routes.HomeController.foodsview()"><button class="btn btn-warning">Cancel</button>
+				</a>
+	  </div>
+	</div>
+	} <!-- End Form definition -->
+
+} <!-- End of page content -->
+
